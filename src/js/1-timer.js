@@ -5,6 +5,7 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 
+
 //створення змінних для елементів DOM для відображення днів, годин, хвилин та секунд таймера
 let userSelectedDate;
 const buttonStart = document.querySelector('[data-start]');
@@ -16,6 +17,17 @@ const secondsCount = document.querySelector('[data-seconds]');
 //функція, яка додає перед значенням нуль, якщо воно менше 10
 function addLeadingZero(value) {
     return value < 10 ? `0${value}` : value;
+}
+
+// функція для скидання таймера
+function resetTime() {
+    clearInterval(timerInterval);
+    daysCount.textContent = '00';
+    hoursCount.textContent = '00';
+    minutesCount.textContent = '00';
+    secondsCount.textContent = '00';
+    userSelectedDate = undefined;
+    buttonStart.removeAttribute('disabled');
 }
 
 //налаштування параметрів 'flatpickr'
@@ -71,9 +83,9 @@ buttonStart.addEventListener('click', () => {
 
 
 // функція, яка запускає зворотній відлік часу з інтервалом в 1 сек.
+   let timerInterval;
 function startCountdown(time) {
     const interval = 1000;
-    let timerInterval;
 
     function updateTimer() {
         const { days, hours, minutes, seconds } = convertMs(time);
@@ -118,6 +130,12 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
+
+// скидання таймера при завантаженні сторінки
+document.addEventListener('DOMContentLoaded', function () {
+    resetTime();
+});
+
 
 
 
