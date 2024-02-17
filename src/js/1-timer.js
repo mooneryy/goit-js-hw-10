@@ -5,7 +5,7 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 
-
+//створення змінних для елементів DOM для відображення днів, годин, хвилин та секунд таймера
 let userSelectedDate;
 const buttonStart = document.querySelector('[data-start]');
 const daysCount = document.querySelector('[data-days]');
@@ -13,11 +13,12 @@ const hoursCount = document.querySelector('[data-hours]');
 const minutesCount = document.querySelector('[data-minutes]');
 const secondsCount = document.querySelector('[data-seconds]');
 
-
+//функція, яка додає перед значенням нуль, якщо воно менше 10
 function addLeadingZero(value) {
     return value < 10 ? `0${value}` : value;
 }
 
+//налаштування параметрів 'flatpickr'
 const options = {
     enableTime: true,
     time_24hr: true,
@@ -47,6 +48,7 @@ const options = {
 
 flatpickr('#datetime-picker', options);
 
+// обробник подій кнопки
 buttonStart.addEventListener('click', () => {
     if (!userSelectedDate) {
         console.error('User date is not defined');
@@ -67,6 +69,8 @@ buttonStart.addEventListener('click', () => {
     buttonStart.setAttribute('disabled', 'true');
 });
 
+
+// функція, яка запускає зворотній відлік часу з інтервалом в 1 сек.
 function startCountdown(time) {
     const interval = 1000;
     let timerInterval;
@@ -93,7 +97,9 @@ function startCountdown(time) {
     timerInterval = setInterval(updateTimer, interval);
 }
 
-
+/*
+функція, яка конвертує час в мілісекундах у об'єкт, що містить к-сть днів, годин, хвилин та секунд до обраної дати
+*/
 function convertMs(ms) {
   // Number of milliseconds per unit of time
   const second = 1000;
