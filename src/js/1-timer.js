@@ -5,7 +5,6 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 
-
 //створення змінних для елементів DOM для відображення днів, годин, хвилин та секунд таймера
 let userSelectedDate;
 const buttonStart = document.querySelector('[data-start]');
